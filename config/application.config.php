@@ -5,6 +5,10 @@
  * @see https://docs.zendframework.com/tutorials/advanced-config/#environment-specific-system-configuration
  * @see https://docs.zendframework.com/tutorials/advanced-config/#environment-specific-application-configuration
  */
+
+use Zend\Db\Adapter\Adapter;
+use Zend\Db\Adapter\AdapterServiceFactory;
+
 return [
     // Retrieve list of modules used in this application.
     'modules' => require __DIR__ . '/modules.config.php',
@@ -59,5 +63,9 @@ return [
 
     // Initial configuration with which to seed the ServiceManager.
     // Should be compatible with Zend\ServiceManager\Config.
-    // 'service_manager' => [],
+
+    // Drive de ligacao do objeto service_manager Adapter ao banco de dados, configuracao editada em: module php bootstrap()
+    'service_manager' => [
+        Adapter::class => AdapterServiceFactory::class,
+    ],
 ];
